@@ -1,7 +1,7 @@
 <template>
   <table>
     <tr>
-      <!-- 登录 -->
+      <!-- 注册 -->
       <td>
         <form name="loginForm">
           <table align="center">
@@ -19,7 +19,7 @@
             </tr>
             <tr>
               <td colspan="2" align="center">
-                <el-button type="primary" @click="login">登录</el-button>
+                <el-button type="primary" @click="sign">注册</el-button>
               </td>
             </tr>
           </table>
@@ -40,14 +40,14 @@ export default {
     };
   },
   methods: {
-    login() {
+    sign() {
       let formObj = {};
       formObj.name = loginForm.name.value;
       formObj.password = loginForm.password.value;
-      common.login(formObj).then(res => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userinfo", res.data.user);
-        this.$router.push('/home')
+      common.sign(formObj).then(res => {
+          console.log(res)
+        // localStorage.setItem("token", res.token);
+        // localStorage.setItem("userinfo", res.user);
       });
     }
   }
