@@ -10,7 +10,7 @@ let apis = {
 let common = {}
 
 common.login = async params => {
-  return await axios.post(apis.login, params, { auth: true })
+  return await axios.post(apis.login, params, { auth: false })
 }
 
 common.sign = async params => {

@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table style="width: 100%">
     <tr>
       <!-- 注册 -->
       <td>
@@ -20,6 +20,7 @@
             <tr>
               <td colspan="2" align="center">
                 <el-button type="primary" @click="sign">注册</el-button>
+                <el-button type="primary" @click="login">返回登录</el-button>
               </td>
             </tr>
           </table>
@@ -49,6 +50,9 @@ export default {
         // localStorage.setItem("token", res.token);
         // localStorage.setItem("userinfo", res.user);
       });
+    },
+    login(){
+      this.$router.push('/')  // 返回登录
     }
   }
 };

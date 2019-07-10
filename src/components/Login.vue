@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table style="width: 100%">
     <tr>
       <!-- 登录 -->
       <td>
@@ -20,6 +20,7 @@
             <tr>
               <td colspan="2" align="center">
                 <el-button type="primary" @click="login">登录</el-button>
+                <el-button type="primary" @click="signin">注册</el-button>
               </td>
             </tr>
           </table>
@@ -46,9 +47,12 @@ export default {
       formObj.password = loginForm.password.value;
       common.login(formObj).then(res => {
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userinfo", res.data.user);
-        this.$router.push('/home')
+        localStorage.setItem("userinfo", JSON.stringify(res.data.user));
+        this.$router.push('/home') // 首页跳转
       });
+    },
+    signin(){
+      this.$router.push('/sign') // 注册跳转
     }
   }
 };
