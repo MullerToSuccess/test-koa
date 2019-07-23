@@ -35,31 +35,32 @@ function formatResponse(response) {
 function checkStatus(data, options) {
   switch (data.code) {
     // 成功
-    case 0:
-      // Vue.prototype.$message({
-      //   message: data.data.message,
-      //   type: "success"
-      // })
+    case "0":
+      Vue.prototype.$message({
+        message: data.message,
+        type: "success"
+      })
       break
     // 失败
-    case 1:
+    case "1":
       Vue.prototype.$message({
         message: data.message,
         type: "warning"
       })
       break
     // 无数据
-    case 2:
+    case "2":
       Vue.prototype.$message({
         message: data.message,
         type: "info"
       })
       break
     default:
-      Vue.prototype.$message({
-        message: data.message,
-        type: "success"
-      })
+      break
+      // Vue.prototype.$message({
+      //   message: data.message,
+      //   type: "success"
+      // })
   }
 }
 
