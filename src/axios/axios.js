@@ -13,8 +13,8 @@ axios.interceptors.request.use(
 )
 axios.defaults.timeout = 15000
 axios.interceptors.response.use(
-  data => {
-    return data.data || data
+  response => {
+    return response
   },
   error => {
     let response = { status: -404, statusText: "请检查网络或稍后重试" }
@@ -32,35 +32,25 @@ function formatResponse(response) {
   }
 }
 // 检测状态：
-function checkStatus(data, options) {
-  switch (data.code) {
-    // 成功
-    case "0":
+function checkStatus(response, options) {
+  console.log("check status", response)
+  if (response.status == 200 || response.status == 304) {
+    if (response.data.message == "success") {
+    } else {
       Vue.prototype.$message({
-        message: data.message,
-        type: "success"
-      })
-      break
-    // 失败
-    case "1":
-      Vue.prototype.$message({
-        message: data.message,
+        message: response.data.message,
         type: "warning"
       })
-      break
-    // 无数据
-    case "2":
+    }
+    return
+  } else {
+    if (response.data.message == "success") {
+    } else {
       Vue.prototype.$message({
-        message: data.message,
-        type: "info"
+        message: response.data.message,
+        type: "warning"
       })
-      break
-    default:
-      break
-      // Vue.prototype.$message({
-      //   message: data.message,
-      //   type: "success"
-      // })
+    }
   }
 }
 
@@ -86,7 +76,7 @@ export default {
     }
     return axios(send).then(res => {
       checkStatus(res, options)
-      return formatResponse(res)
+      return formatResponse(res.data)
     })
   },
   post(url, data, options) {
@@ -111,7 +101,7 @@ export default {
     }
     return axios(send).then(res => {
       checkStatus(res, options)
-      return formatResponse(res)
+      return formatResponse(res.data)
     })
   }
 }

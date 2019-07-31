@@ -61,6 +61,11 @@ export default {
 </script>
 <style scoped lang='scss'>
 .loginHome {
+      margin: auto;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    align-items: center;
   // background: url("https://avatars3.githubusercontent.com/u/18322127?s=460&v=4");
 }
 </style>
